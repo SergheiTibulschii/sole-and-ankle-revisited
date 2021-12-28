@@ -5,7 +5,7 @@ import { COLORS, WEIGHTS } from '../../constants';
 
 import Icon from '../Icon';
 
-const Select = ({ label, value, children, ...delegated }) => {
+const Select = ({ label, value, children, className, ...delegated }) => {
   const childArray = React.Children.toArray(children);
   const selectedChild = childArray.find(
     (child) => child.props.value === value
@@ -14,7 +14,7 @@ const Select = ({ label, value, children, ...delegated }) => {
   const displayedValue = selectedChild.props.children;
 
   return (
-    <Wrapper>
+    <Wrapper className={className}>
       <VisibleLabel>{label}</VisibleLabel>
 
       <SelectWrapper>
@@ -39,7 +39,7 @@ const Wrapper = styled.label`
 `;
 
 const VisibleLabel = styled.span`
-  color: ${COLORS.gray[700]};
+  color: var(--clr-gray-700);
   margin-right: 16px;
 `;
 
@@ -61,10 +61,10 @@ const NativeSelect = styled.select`
 
 const DisplayedBit = styled.span`
   display: block;
-  background: ${COLORS.gray[100]};
+  background: var(--clr-gray-100);
   font-size: 1rem;
-  font-weight: ${WEIGHTS.medium};
-  color: ${COLORS.gray[900]};
+  font-weight: var(--font-medium);
+  color: var(--clr-gray-900);
   padding: 12px 42px 12px 16px;
   border-radius: 8px;
   pointer-events: none;

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/macro';
 
-import { WEIGHTS } from '../../constants';
+import {BREAKPOINTS, QUERIES, WEIGHTS} from '../../constants';
 
 import Breadcrumbs from '../Breadcrumbs';
 import Select from '../Select';
@@ -14,15 +14,24 @@ const ShoeIndex = ({ sortId, setSortId }) => {
     <Wrapper>
       <MainColumn>
         <Header>
-          <Title>Running</Title>
-          <Select
+          <div>
+            <Breadcrumbs>
+              <Breadcrumbs.Crumb href="/">Home</Breadcrumbs.Crumb>
+              <Breadcrumbs.Crumb href="/sale">Sale</Breadcrumbs.Crumb>
+              <Breadcrumbs.Crumb href="/sale/shoes">
+                Shoes
+              </Breadcrumbs.Crumb>
+            </Breadcrumbs>
+            <Title>Running</Title>
+          </div>
+          <SortSelect
             label="Sort"
             value={sortId}
             onChange={(ev) => setSortId(ev.target.value)}
           >
             <option value="newest">Newest Releases</option>
             <option value="price">Price</option>
-          </Select>
+          </SortSelect>
         </Header>
         <Spacer size={32} />
         <ShoeGrid />
@@ -51,6 +60,11 @@ const Wrapper = styled.div`
 
 const LeftColumn = styled.div`
   flex-basis: 248px;
+  display: none;
+  
+  @media (min-width: ${BREAKPOINTS.md}px) {
+    display: block;
+  }
 `;
 
 const MainColumn = styled.div`
@@ -60,12 +74,20 @@ const MainColumn = styled.div`
 const Header = styled.header`
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: center;
 `;
 
 const Title = styled.h2`
   font-size: 1.5rem;
-  font-weight: ${WEIGHTS.medium};
+  font-weight: var(--font-medium);
 `;
+
+const SortSelect = styled(Select)`
+  display: none;
+  
+  @media ${QUERIES.tabletAndUp} {
+    display: flex;
+  }
+`
 
 export default ShoeIndex;
